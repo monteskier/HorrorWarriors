@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html class="no-js">
+    <head>
+        <title>HorrorWarriors</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="scripts/angular_min.js"></script>
+        <link rel="stylesheet" href="styles/index.css">
+        <script src="scripts/angular-route.min.js"></script> 
+    </head>
+    <body>
+        
+    <body ng-app="horrorWarriorApp">
+     <nav class="menuBar">   
+        <ul>
+            <li><a ng-href="#/login">login</a></li><li><a ng-href="#/logon">logon</a></li>
+        </ul>
+     </nav>
+         <div ng-view=""></div>
+    </body>
+        <script src="scripts/jquery.js"></script>
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/home.js"></script>
+        <script src="scripts/controllers/logon.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/maps/createMaps.js"></script>
+        <script src="scripts/controllers/beast/createBeast.js"></script>
+        <script src="scripts/controllers/meuEspai.js"></script>
+        <script src="scripts/cookies.js"></script>
+        
+</html>
