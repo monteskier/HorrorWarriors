@@ -106,9 +106,9 @@ class HorrorWarriors:
     def createMap(self,*args,**kwargs):
         self.resposta = {}
         try:
-            print ("puta")
+
             dades_in = cherrypy.request.json
-            print ("puta")
+
             id = str(dades_in["id"])
             mapName = str(dades_in["mapName"])
             col = int(dades_in["col"])
@@ -123,6 +123,37 @@ class HorrorWarriors:
             self.resposta["status"] = "Error"
             self.resposta["msg"] = "El mapa no ha guardat correctament"
             return json.dumps(self.resposta)
+
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    @cherrypy.tools.json_in()
+    def createBeast(self, *args, **keywargs):
+        self.resposta = {}
+        try:
+            dades_in = cherrypy.request.json
+            id_master = str(dades_in["id_master"])
+            nom = str (dades_in["nom"])
+            avatar = str(dades_in["avatar"])
+            live = str(dades_in["live"])
+            force = str(dades_in["force"])
+            agility = str(dades_in["agility"])
+            defense = str(dades_in["defense"])
+
+            uid = self.bestiari.save({"id_master":id_master,"nom":nom,"avatar":avatar,"live":live,"force":force,"agility":agility,"defense":defense})
+            self.resposta["status"] = """OK"""
+            self.resposta["msg"] = """Les dades s'han guardat correctament"""
+            return(json.dumps(self.resposta))
+
+        except:
+            self.resposta["status"] = ["Error"]
+            self.resposta["msg"] = ["""No s'han passat les dades correctament"""]
+            return json.dumps(self.resposta)
+
+
+
+
+
+
 
 
 application = cherrypy.Application(HorrorWarriors(), script_name=None, config=None)

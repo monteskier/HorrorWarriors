@@ -45,7 +45,14 @@ angular.module('horrorWarriorApp')
     }
     $scope.tipus_bestia();
     $scope.save = function(){
-        
+        var id = readCookie("id");
+        $http.post('../api/createBeast',{id_master:id, avatar:$scope.avatar, nom:$scope.nom, live:$scope.live, force:$scope.force, agility:$scope.agility, defense:$scope.defense})
+        .success(function(data) {
+            $scope.response = JSON.parse(data);
+        })
+        .error(function(data) {
+            $scope.response = JSON.parse(data);
+    });
     }
   });
 

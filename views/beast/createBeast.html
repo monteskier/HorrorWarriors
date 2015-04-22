@@ -8,6 +8,7 @@
     </head>
     <body>
         <div><h1>Crea les besties!</h1></div>
+        <h3>{{response["msg"]}}</h3>
         <section class="taules">
             <table>
             <tr>
@@ -26,7 +27,7 @@
                 <td>Nom bestia:</td><td><input type="text" ng-model="nom"></td>
             </tr>
             
-                <td><input type="button" ng-click="save" value="Guardar"></td>
+                <td><input type="button" ng-click="save()" value="Guardar"></td>
             </tr>
             <tr>
                 <td><img src="/dist/images/beast/img/{{avatar}}" width="200px" height="200px" ng-init="avatar='Avatar_Abominacio.jpg'"></td>
