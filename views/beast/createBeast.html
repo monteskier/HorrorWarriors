@@ -1,12 +1,4 @@
-<!DOCTYPE html>
 
-<html>
-    <head>
-        <title>Create Beast</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
         <div><h1>Crea les besties!</h1></div>
         <h3>{{response["msg"]}}</h3>
         <section class="taules">
@@ -49,8 +41,20 @@
             <tr>
                 <td>Defensa:</td><td><input type="text" value=5 size="5" ng-model="defense"></td>
             </tr>
+                                 
             
             </table>
         </section>
-    </body>
-</html>
+        <section class="taules">
+        <div id="bestiari">
+            
+            <table border=1 class="banqueta">
+                
+            <caption>ELS TESU MONSTRES</caption>
+            
+            <tr ng-repeat="resp in response['data']">
+                <td>{{resp['nom']}} </td><td><p ng-click="eliminarBestia()">eliminar</p></td>
+            </tr>
+            </table>
+        </div>
+        </section>

@@ -1,6 +1,11 @@
 header, footer, .menuBar{
     font-family:Arial; 
 }
+.menuBar{
+    position:absolute;
+    margin-right: auto;
+    margin-left: auto;
+}
 .menuBar ul {
     display:table-row;
         }
@@ -8,7 +13,6 @@ header, footer, .menuBar{
     {
         display: table-cell;
         font-size:1em;
-        height: 100px;
         list-style-type: none;
         margin: 10px;
         vertical-align: middle;
@@ -19,12 +23,20 @@ header, footer, .menuBar{
             display:table-cell;
             vertical-align: middle;
             height:20px;
+            height:1em;
+            width: 3em;
+            font-size:3em;
             color:white;
             background-color:#105cb6;
             padding:0.3em;
-            opacity: 0.5;    }
+            opacity: 0.5;    
+            -webkit-transition:1s, font-size;
+            -moz-webkit-transition:1s, font-size;
+            -transition:1s, font-size;
+        }
         .menuBar ul li a:hover {
             opacity:1;
+            
         }
         .menuBar ul li.button a {
             height:50px;
@@ -102,4 +114,18 @@ body{
     height: 115px;
     text-align: center;
     color: black;
+}
+.banqueta{
+    font-family: Arial;
+    font-size: 1em;
+    background-color: #46b8da;
+    color:black;
+    width:300px;
+}
+#dinamyc{
+    position:relative;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top:10em;
+    display: block;
 }

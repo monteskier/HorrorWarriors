@@ -9,11 +9,11 @@ angular.module('horrorWarriorApp')
         success( function (data){
             data = JSON.parse(data);
             if(data["master"]==true){
-                $scope.esMaster = true;
-                $scope.esJugador = false;
+                $rootScope.esMaster = true;
+                $rootScope.esJugador = false;
             }else if(data["master"]==false){
-                $scope.esMaster = false;
-                $scope.esJugador = true;
+                $rootScope.esMaster = false;
+                $rootScope.esJugador = true;
             }
       }).error(function (data){
 

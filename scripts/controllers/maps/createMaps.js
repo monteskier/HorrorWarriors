@@ -15,7 +15,7 @@ angular.module('horrorWarriorApp')
       $scope.canvasReady = function(){
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
-        var fons = $scope.background;
+        $scope.fons = $scope.background;
         var i,j=0;
         for(i=0;i<= $scope.fil;i++){
             for (j=0;j<=$scope.col;j++){

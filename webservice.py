@@ -149,6 +149,29 @@ class HorrorWarriors:
             self.resposta["msg"] = ["""No s'han passat les dades correctament"""]
             return json.dumps(self.resposta)
 
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    @cherrypy.tools.json_in()
+    def loadBeast(self,*args, **keywargs):
+        self.resposta = {}
+        try:
+            dades_in = cherrypy.request.json
+            id_master = str(dades_in["id_master"])
+            besties = self.bestiari.find({"id_master":id_master},{"nom":1, "_id":False})
+            besties_array = []
+
+            for best in besties:
+                best["nom"] = str(best["nom"])
+                besties_array.append(best)
+
+            self.resposta["status"] = "Ok"
+            self.resposta["msg"] = """S'han carregat les dades"""
+            self.resposta["data"] = besties_array
+            return(json.dumps(self.resposta))
+        except:
+            self.resposta["status"] = "Error"
+            self.resposta["msg"] = """No tens encara cap mostre disponible!"""
+            return(json.dumps(self.resposta))
 
 
 
