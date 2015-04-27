@@ -11,6 +11,8 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link rel="stylesheet" href="styles/index.css">
+        <link rel="stylesheet" href="styles/common.css">
+        
         
     </head>
         
@@ -19,9 +21,10 @@ and open the template in the editor.
         <ul>
             <li><a ng-href="#/login">login</a></li><li><a ng-href="#/logon">logon</a></li>
             <li ng-show="esMaster"><a  ng-href="#/createMaps">Crear Mapa</a></li>
-            <li ng-show="esMaster"> <a ng-href="#/createBeast">Crear Besties</a></li>
-            <li ng-show="esJugador">Crear Herois</li>
-            <li ng-show="esJugador">Cercar Partides</li>
+            <li ng-show="esMaster"><a ng-href="#/createBeast">Crear Besties</a></li>
+            <li ng-show="esMaster"><a ng-href="#/listBeast">llista de Besties</a></li>
+            <li ng-show="esJugador"><a ng-href="">Crear Herois</a></li>
+            <li ng-show="esJugador"><a ng-href="">Cercar Partides</a></li>
         </ul>
      </nav>
          <div ng-view="" id="dinamyc"></div>
@@ -35,6 +38,7 @@ and open the template in the editor.
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/maps/createMaps.js"></script>
         <script src="scripts/controllers/beast/createBeast.js"></script>
+        <script src="scripts/controllers/beast/listBeast.js"></script>
         <script src="scripts/controllers/meuEspai.js"></script>
         <script src="scripts/cookies.js"></script>
         

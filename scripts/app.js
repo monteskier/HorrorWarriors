@@ -41,6 +41,11 @@ function direccions($routeProvider){
                 templateUrl: "views/beast/createBeast.html"
 
         })
+        .when("/listBeast",{
+                controller: "listBeastCtrl",
+                controllerAs: "listBeastCtrl",
+                templateUrl: "views/beast/listBeast.html"
+        })
         .otherwise({
         redirectTo: '/'
       })
