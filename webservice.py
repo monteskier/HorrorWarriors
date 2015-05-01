@@ -18,6 +18,7 @@ class HorrorWarriors:
         self.jugadors = self.db.jugadors
         self.personatges = self.db.personatges
         self.bestiari = self.db.bestiari
+        self.heroes = self.db.heroes
         self.partida = self.db.partida
         self.combat = self.db.combat
         self.terreny = self.db.terreny
@@ -195,6 +196,81 @@ class HorrorWarriors:
         except:
             self.resposta["status"] = "Error"
             self.resposta["msg"] = """No tens encara cap mostre disponible!"""
+            return(json.dumps(self.resposta))
+    
+    """ Opcions del Jugador normal"""
+    
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    @cherrypy.tools.json_in()
+    def createHeroe(self, *args, **keywargs):
+        self.resposta = {}
+        try:
+            dades_in = cherrypy.request.json
+            id_jugador = str(dades_in["id_jugador"])
+            nom = str (dades_in["nom"])
+            avatar = str(dades_in["avatar"])
+            live = str(dades_in["live"])
+            force = str(dades_in["force"])
+            agility = str(dades_in["agility"])
+            defense = str(dades_in["defense"])
+
+            uid = self.heroes.save({"id_jugador":id_jugador,"nom":nom,"avatar":avatar,"live":live,"force":force,"agility":agility,"defense":defense})
+            self.resposta["status"] = """OK"""
+            self.resposta["msg"] = """Les dades s'han guardat correctament"""
+            return(json.dumps(self.resposta))
+
+        except:
+            self.resposta["status"] = ["Error"]
+            self.resposta["msg"] = ["""No s'han passat les dades correctament"""]
+            return json.dumps(self.resposta)
+
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    @cherrypy.tools.json_in()
+    def loadHeroes(self,*args, **keywargs):
+        self.resposta = {}
+        try:
+            dades_in = cherrypy.request.json
+            id_jugador = str(dades_in["id_jugador"])
+            heroes = self.heroes.find({"id_jugador":id_jugador},{"nom":1, "_id":False})
+            heroes_array = []
+
+            for hero in heroes:
+                hero["nom"] = str(hero["nom"])
+                heroes_array.append(hero)
+
+            self.resposta["status"] = "Ok"
+            self.resposta["msg"] = """S'han carregat les dades"""
+            self.resposta["data"] = heroes_array
+            return(json.dumps(self.resposta))
+        except:
+            self.resposta["status"] = "Error"
+            self.resposta["msg"] = """No tens encara cap Heroi disponible!"""
+            return(json.dumps(self.resposta))
+
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    @cherrypy.tools.json_in()
+    def listHeroes(self):
+        self.resposta = {}
+        try:
+            dades_in = cherrypy.request.json
+            id_jugador = str(dades_in["id_jugador"])
+            heroes = self.heroes.find({"id_jugador":id_jugador},{"_id":False})
+            heroes_array = []
+
+            for hero in heroes:
+                hero["nom"] = str(hero["nom"])
+                heroes_array.append(hero)
+
+            self.resposta["status"] = "Ok"
+            self.resposta["msg"] = """S'han carregat les dades"""
+            self.resposta["data"] = heroes_array
+            return(json.dumps(self.resposta))
+        except:
+            self.resposta["status"] = "Error"
+            self.resposta["msg"] = """No tens encara cap Heroi disponible!"""
             return(json.dumps(self.resposta))
 
 

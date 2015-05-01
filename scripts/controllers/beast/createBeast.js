@@ -68,4 +68,3 @@ angular.module('horrorWarriorApp')
     }
     
   });
-

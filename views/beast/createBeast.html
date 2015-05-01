@@ -1,7 +1,7 @@
 
         <div><h1>Crea les besties!</h1></div>
         <h3>{{response["msg"]}}</h3>
-        <section class="taules">
+        <section id="sec_editor">
             <table>
             <tr>
                 <td>Avatar:</td><td>
@@ -15,18 +15,11 @@
                     </select>
                 </td>
             </tr>
-            <tr>
-                <td>Nom bestia:</td><td><input type="text" ng-model="nom"></td>
-            </tr>
-            
-                <td><input type="button" ng-click="save()" value="Guardar"></td>
-            </tr>
+         
             <tr>
                 <td><img src="/dist/images/beast/img/{{avatar}}" width="200px" height="200px" ng-init="avatar='Avatar_Abominacio.jpg'"></td>
             </tr>
         </table>
-        </section>
-        <section class="taules">
         <table>
             <tr>
                 <td>Vida:</td><td><input type="text" value=5 size="5" ng-model="live"></td>
@@ -41,11 +34,17 @@
             <tr>
                 <td>Defensa:</td><td><input type="text" value=5 size="5" ng-model="defense"></td>
             </tr>
+               <tr>
+                <td>Nom bestia:</td><td><input type="text" ng-model="nom"></td>
+            </tr>
+            
+                <td><input type="button" ng-click="save()" value="Guardar"></td>
+            </tr>
                                  
             
             </table>
-        </section>
-        <section class="taules">
+        
+        
         <div id="bestiari">
             
             <table border=1 class="banqueta">
