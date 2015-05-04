@@ -272,7 +272,112 @@ class HorrorWarriors:
             self.resposta["status"] = "Error"
             self.resposta["msg"] = """No tens encara cap Heroi disponible!"""
             return(json.dumps(self.resposta))
+    
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    @cherrypy.tools.json_in()
+    def createParty(self):
+        self.resposta = {}
+        try:
+            dades_in = cherrypy.request.json
+            
+            id_jugador = str(dades_in["master_id"])
+            nom = str(dades_in["nom"])
+            pas = str(dades_in["pass"])
+            maxper = int(dades_in["maxper"])
+            idioma = str(dades_in["idioma"])
+            print(id,nom,pas,maxper,idioma)
+            
+            master = self.jugadors.find_one({"_id":ObjectId(id_jugador)})
+            self.partida.save({"id_master":id_jugador,"nom":nom, "pass":pas, "maxper":maxper, "idioma":idioma, "online":False})
+            self.resposta["status"] = "OK"
+            self.resposta["msg"] = """S'han guardat les dades d el apartida correctament"""
+            return(json.dumps(self.resposta))
+                
+        except:
+            self.resposta["status"] = "Error"
+            self.resposta["msg"] = """Aquest usuari no pot crear partida"""
+            return(json.dumps(self.resposta))
 
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    @cherrypy.tools.json_in()
+    def loadPartys(self,*args, **keywargs):
+        self.resposta = {}
+        try:
+            dades_in = cherrypy.request.json
+            id_jugador = str(dades_in["id_jugador"])
+            partys = self.partida.find({"id_master":id_jugador},{"_id":False})
+            partys_array = []
+
+            for party in partys:
+                party["nom"] = str(party["nom"])
+                party["maxper"] = int(party["maxper"])
+                party["online"] = str(party["online"])
+                partys_array.append(party)
+
+            self.resposta["status"] = "Ok"
+            self.resposta["msg"] = """S'han carregat les dades"""
+            self.resposta["data"] = partys_array
+            return(json.dumps(self.resposta))
+        except:
+            self.resposta["status"] = "Error"
+            self.resposta["msg"] = """No tens encara cap Partida disponible!"""
+            return(json.dumps(self.resposta))
+    
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    @cherrypy.tools.json_in()
+    def onlineParty(self):
+        self.resposta = {}
+        try:
+            dades_in = cherrypy.request.json
+            nom = str(dades_in["nom"])
+            estat = str(dades_in["estat"])
+            self.partida.find_one({"nom":nom})
+            estat2 = None
+            if(estat=="True"):
+                estat2 = False
+            if(estat == "False" ):
+                estat2 = True
+            self.partida.update({"nom":nom},{'$set':{"online":estat2}})
+            self.resposta["status"] = "OK"
+            self.resposta["msg"] = """El estat de la partida ara es %s""",(estat2)
+            self.resposta["estat"] = estat2
+            return json.dumps(self.resposta)
+        except:
+            self.resposta["status"] = "Error"
+            self.resposta["msg"] = """El estat de la partida sense modificar"""
+            self.resposta["estat"] = estat2
+            return(json.dumps(self.resposta))
+
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    def listParty(self):
+        self.resposta = {}
+        try:
+            valor = True
+            partides = self.partida.find({"online":True},{"_id":False})
+            partides_array = []
+            for part in partides:
+                part["nom"] = str(part["nom"])
+                part["online"] = str(part["online"])
+                part["maxper"] = str(part["maxper"])
+                part["pass"] = str(part["pass"])
+                idMaster = str(part["id_master"])
+                nomMaster = self.jugadors.find_one({"_id":idMaster})
+                nomMaster = str(nomMaster["nick"])
+                part["master"] = str(part["master"])
+                partides_array.append(part)
+                    
+            self.resposta["status"] = "OK"
+            self.resposta["msg"] = "Les dades s'han carregat estupendament"
+            self.resposta["data"] = partides_array 
+            return(json.dumps(self.resposta))
+        except:
+            self.resposta["status"] = "Error"
+            self.resposta["msg"] = "Les dades no s'han pogut consultar"
+            return(json.dumps(self.resposta))
 
 
 
