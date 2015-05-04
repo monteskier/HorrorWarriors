@@ -365,9 +365,10 @@ class HorrorWarriors:
                 part["maxper"] = str(part["maxper"])
                 part["pass"] = str(part["pass"])
                 idMaster = str(part["id_master"])
-                nomMaster = self.jugadors.find_one({"_id":idMaster})
+                nomMaster = self.jugadors.find_one({"_id":ObjectId(idMaster)})
                 nomMaster = str(nomMaster["nick"])
-                part["master"] = str(part["master"])
+                print nomMaster
+                part["master"] = nomMaster
                 partides_array.append(part)
                     
             self.resposta["status"] = "OK"
